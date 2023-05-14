@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @user = current_user
-    @group.user << @user
+    @group.users << @user
     email_params['emails'].split(',').each do |e|
       @group.users << User.where(email: e) unless @group.users.collect { |p| p[:email].to_s }.include?(e)
     end
@@ -16,7 +16,6 @@ class GroupsController < ApplicationController
     redirect_to root_path
   end
 
-  
   def show
     @group = Group.find_by_id(params[:id])
     @expenses = Expense.where(group_id: @group.id)

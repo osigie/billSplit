@@ -5,4 +5,6 @@ class HomeController < ApplicationController
     @group = current_user.groups
   end
 
+
+
 end
